@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { initialGame, initialGameBlack } from "../config/Positions";
 import { ChangePosition } from "./ChangePosition";
 import "./MainContainer.css";
 import { DivideId } from "./Utilities";
 import { Sequences, SequencesProps } from "../config/Sequences";
+import { IonContent } from "@ionic/react";
+import { isPlatform } from "@ionic/core";
 
 interface ContainerProps {}
 
@@ -504,182 +506,189 @@ const MainContainer: React.FC<ContainerProps> = () => {
     }, 650);
   };
 
+  const contentRef = useRef<HTMLIonContentElement>(null);
+
   // zwracany html
   return (
-    <div className="site">
-      <div className="title">{title}</div>
-      <div className="playAs" style={{ marginBottom: "10px" }}>
-        {playAs}
-      </div>
-      <div className="chessboard-container">
-        <section className={"chessboard " + (blockChessboard ? "block" : "")}>
-          {_initialGame.map(function (e) {
-            return (
-              <div
-                id={e[0]}
-                className={
-                  e[1] +
-                  " " +
-                  e[2] +
-                  " " +
-                  (firstPiece[0] == e[0] || firstPieceMove.includes(e[0])
-                    ? "piece-active"
-                    : "")
-                }
-                onClick={() => {
-                  if (e[1].startsWith(currentColor)) {
-                    setFirstPieceMove(GetPossiblePos(e));
-                    PieceClick(e);
-                    return;
+    <IonContent ref={contentRef} fullscreen>
+      <div className="site">
+        <div className="title">{title}</div>
+        <div className="playAs" style={{ marginBottom: "10px" }}>
+          {playAs}
+        </div>
+        <div className="chessboard-container">
+          <section className={"chessboard " + (blockChessboard ? "block" : "")}>
+            {_initialGame.map(function (e) {
+              return (
+                <div
+                  id={e[0]}
+                  className={
+                    e[1] +
+                    " " +
+                    e[2] +
+                    " " +
+                    (firstPiece[0] == e[0] || firstPieceMove.includes(e[0])
+                      ? "piece-active"
+                      : "")
                   }
-
-                  if (firstPiece.length > 0) {
-                    if (firstPiece[1].startsWith(currentColor)) {
+                  onClick={() => {
+                    if (e[1].startsWith(currentColor)) {
                       setFirstPieceMove(GetPossiblePos(e));
                       PieceClick(e);
                       return;
                     }
+
+                    if (firstPiece.length > 0) {
+                      if (firstPiece[1].startsWith(currentColor)) {
+                        setFirstPieceMove(GetPossiblePos(e));
+                        PieceClick(e);
+                        return;
+                      }
+                    }
+                  }}
+                ></div>
+              );
+            })}
+          </section>
+        </div>
+        <input
+          type="text"
+          placeholder="Search opening database..."
+          onInput={(e) => {
+            const _e = e.nativeEvent.target as HTMLInputElement;
+            SearchOpening(_e.value.toLowerCase());
+          }}
+        ></input>
+        <section className="opening-container">
+          {openingsArrState.map((e) => {
+            return (
+              <div
+                className={"opening-box " + (blockOpenings ? "block" : "")}
+                onClick={() => {
+                  if (isPlatform("mobile")) {
+                    contentRef.current?.scrollToPoint(0, 0);
                   }
+                  setModalOpen(true);
+                  setTempOpening([e.name, e.id]);
                 }}
-              ></div>
+              >
+                <p>{e.name}</p>
+              </div>
             );
           })}
         </section>
-      </div>
-      <section className="opening-container">
-        {openingsArrState.map((e) => {
-          return (
-            <div
-              className={"opening-box " + (blockOpenings ? "block" : "")}
-              onClick={() => {
-                setModalOpen(true);
-                setTempOpening([e.name, e.id]);
-              }}
-            >
-              <p>{e.name}</p>
-            </div>
-          );
-        })}
-      </section>
-      <input
-        type="text"
-        placeholder="Search opening database..."
-        onInput={(e) => {
-          const _e = e.nativeEvent.target as HTMLInputElement;
-          SearchOpening(_e.value.toLowerCase());
-        }}
-      ></input>
-      <div className={"modal " + (modalOpen ? "animated" : "")}>
-        <p className="modalP">Play as?</p>
-        <button
-          type="button"
-          className="whiteButton"
-          onClick={() => {
-            setCurrentColor("white");
-            OpeningChoose(tempOpening[0], tempOpening[1]);
-            setModalOpen(false);
-            setPlayAs(`You play as white`);
-            _setInitialGame(initialGame);
-          }}
-        ></button>
-
-        {GetOpeningChoose(tempOpening[0], tempOpening[1]).length > 1 ? (
+        <div className={"modal " + (modalOpen ? "animated" : "")}>
+          <p className="modalP">Play as?</p>
           <button
             type="button"
-            className="blackButton"
+            className="whiteButton"
             onClick={() => {
-              setCurrentColor("black");
-              let _currentOpening = OpeningChoose(
-                tempOpening[0],
-                tempOpening[1]
-              );
+              setCurrentColor("white");
+              OpeningChoose(tempOpening[0], tempOpening[1]);
               setModalOpen(false);
-              setPlayAs(`You play as black`);
-              let tempInitGame = ChangePosition(
-                _currentOpening[0][0],
-                _currentOpening[0][1],
-                initialGameBlack
-              );
-
-              _setInitialGame(tempInitGame);
-              setMoveCounter(moveCounter + 1);
+              setPlayAs(`You play as white`);
+              _setInitialGame(initialGame);
             }}
           ></button>
-        ) : (
-          <></>
-        )}
-        <button
-          type="button"
-          className="checkButton"
-          onClick={() => {
-            //setBlockChessboard(true);
-            AutoPlay();
-            setModalOpen(false);
-            setPlayAs(`Checking`);
-            setBlockOpenings(true);
-            setCurrentColor("white");
-          }}
-        >
-          check opening
-        </button>
+
+          {GetOpeningChoose(tempOpening[0], tempOpening[1]).length > 1 ? (
+            <button
+              type="button"
+              className="blackButton"
+              onClick={() => {
+                setCurrentColor("black");
+                let _currentOpening = OpeningChoose(
+                  tempOpening[0],
+                  tempOpening[1]
+                );
+                setModalOpen(false);
+                setPlayAs(`You play as black`);
+                let tempInitGame = ChangePosition(
+                  _currentOpening[0][0],
+                  _currentOpening[0][1],
+                  initialGameBlack
+                );
+
+                _setInitialGame(tempInitGame);
+                setMoveCounter(moveCounter + 1);
+              }}
+            ></button>
+          ) : (
+            <></>
+          )}
+          <button
+            type="button"
+            className="checkButton"
+            onClick={() => {
+              //setBlockChessboard(true);
+              AutoPlay();
+              setModalOpen(false);
+              setPlayAs(`Checking`);
+              setBlockOpenings(true);
+              setCurrentColor("white");
+            }}
+          >
+            check opening
+          </button>
+        </div>
+
+        <div className={"correct modal " + (correctOpen ? "animated" : "")}>
+          Correct!
+          <button
+            type="button"
+            className="tryAgainButton"
+            onClick={() => {
+              OpeningChoose(tempOpening[0], tempOpening[1]);
+              setCorrectOpen(false);
+              if (currentColor === "black") {
+                let _currentOpening = OpeningChoose(
+                  tempOpening[0],
+                  tempOpening[1]
+                );
+                setPlayAs(`You play as black`);
+                let tempInitGame = ChangePosition(
+                  _currentOpening[0][0],
+                  _currentOpening[0][1],
+                  initialGameBlack
+                );
+
+                _setInitialGame(tempInitGame);
+              }
+            }}
+          >
+            Play again
+          </button>
+        </div>
+
+        <div className={"wrong modal " + (wrongOpen ? "animated" : "")}>
+          Wrong!
+          <button
+            type="button"
+            className="tryAgainButton"
+            onClick={() => {
+              OpeningChoose(tempOpening[0], tempOpening[1]);
+              setWrongOpen(false);
+              if (currentColor === "black") {
+                let _currentOpening = OpeningChoose(
+                  tempOpening[0],
+                  tempOpening[1]
+                );
+                setPlayAs(`You play as black`);
+                let tempInitGame = ChangePosition(
+                  _currentOpening[0][0],
+                  _currentOpening[0][1],
+                  initialGameBlack
+                );
+
+                _setInitialGame(tempInitGame);
+              }
+            }}
+          >
+            Try again
+          </button>
+        </div>
       </div>
-
-      <div className={"correct modal " + (correctOpen ? "animated" : "")}>
-        Correct!
-        <button
-          type="button"
-          className="tryAgainButton"
-          onClick={() => {
-            OpeningChoose(tempOpening[0], tempOpening[1]);
-            setCorrectOpen(false);
-            if (currentColor === "black") {
-              let _currentOpening = OpeningChoose(
-                tempOpening[0],
-                tempOpening[1]
-              );
-              setPlayAs(`You play as black`);
-              let tempInitGame = ChangePosition(
-                _currentOpening[0][0],
-                _currentOpening[0][1],
-                initialGameBlack
-              );
-
-              _setInitialGame(tempInitGame);
-            }
-          }}
-        >
-          Play again
-        </button>
-      </div>
-
-      <div className={"wrong modal " + (wrongOpen ? "animated" : "")}>
-        Wrong!
-        <button
-          type="button"
-          className="tryAgainButton"
-          onClick={() => {
-            OpeningChoose(tempOpening[0], tempOpening[1]);
-            setWrongOpen(false);
-            if (currentColor === "black") {
-              let _currentOpening = OpeningChoose(
-                tempOpening[0],
-                tempOpening[1]
-              );
-              setPlayAs(`You play as black`);
-              let tempInitGame = ChangePosition(
-                _currentOpening[0][0],
-                _currentOpening[0][1],
-                initialGameBlack
-              );
-
-              _setInitialGame(tempInitGame);
-            }
-          }}
-        >
-          Try again
-        </button>
-      </div>
-    </div>
+    </IonContent>
   );
 };
 

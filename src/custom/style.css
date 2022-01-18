@@ -1,33 +1,156 @@
+/* mobile */
+@media only screen and (max-width: 600px) {
+
+    .chessboard {
+        width: 100vw;
+        height: 100vw;
+    }
+
+    .title {
+        font-size: 35px;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    .playAs {
+        font-size: 25px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .opening-box {
+        display: inline-flex;
+    }
+
+    .opening-container {
+        max-height: 370px;
+        overflow: auto;
+    }
+
+    input {
+        margin: auto;
+        display: block;
+        margin-top: 20px;
+    }
+    .opening-box:hover {
+        transform: scale(1.05);
+    }
+
+    .modal.animated {
+        transform: translate(-50%, -50%);
+    }
+
+    .opening-box {
+        margin: 5%;
+        width: 40%;
+        height: 40%;
+    }
+
+    .opening-box p {
+        text-align: center;
+        width: 100%;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+}
+
+/* desktop */
+@media only screen and (min-width: 600px) {
+
+
+    .chessboard-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-40%, -50%);
+    }
+
+    .chessboard {
+        width: 60vw;
+        height: 60vw;
+    }
+
+    .title {
+        position: absolute;
+        top: 3%;
+        left: 50%;
+        transform: translate(-43%, 0%);
+        font-size: 35px;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .playAs {
+        position: absolute;
+        top: 8%;
+        left: 50%;
+        transform: translate(-43%, 0%);
+        font-size: 25px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .opening-container {
+        min-height: 100vh;
+        max-height: 100vh;
+        overflow: auto;
+        width: fit-content;
+    }
+
+    input {
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-40%, 0%);
+    }
+    .opening-box:hover {
+        transform: translate(5%, 0%);
+    }
+    
+    .modal.animated {
+        transform: translate(-40%, -50%);
+    }
+
+    .chessboard {
+        max-width: 70vh;
+        min-width: 60vh;
+        max-height: 70vh;
+        min-height: 60vh;
+    }
+
+    .opening-box {
+        max-width: 140px;
+        min-width: 140px;
+        margin: 25px 15px;
+    }
+
+}
+
+
 .site {
     /* max-height: 86vh; */
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 5px;
     margin-top: 15px;
     max-width: 1040px;
-    position: relative;
+    /* position: relative; */
     margin: 0 auto;
 }
 
 .chessboard-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -50%);
     color: rgb(0, 0, 0);
 }
 
+
 .chessboard {
     display: grid;
-    width: 60vw;
-    max-width: 70vh;
-    min-width: 60vh;
-    height: 60vw;
-    max-height: 70vh;
-    min-height: 60vh;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     box-shadow: 10px 5px 5px black;
-
 }
 
 .block {
@@ -49,12 +172,7 @@
     border: 2px solid blue;
 }
 
-.opening-container {
-    min-height: 100vh;
-    max-height: 100vh;
-    overflow: auto;
-    width: fit-content;
-}
+
 
 .box-button:hover {
     border: white 2px solid;
@@ -62,8 +180,6 @@
 }
 
 .opening-box {
-    max-width: 140px;
-    min-width: 140px;
     background-color: rgb(51, 49, 49);
     border: 2px solid rgb(144, 144, 144);
     color: rgb(255, 255, 255);
@@ -72,14 +188,12 @@
     text-align: center;
     cursor: pointer;
     box-shadow: 10px 5px 5px black;
-    margin: 25px 15px;
 }
 
 .opening-box:hover {
     border-left: 2px solid rgb(255, 255, 255);
     border-top: 2px solid rgb(255, 255, 255);
     transition: .2s;
-    transform: translate(5%, 0%);
 }
 
 p {
@@ -87,10 +201,6 @@ p {
 }
 
 input {
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translate(-40%, 0%);
     width: 400px;
     height: 5vh;
     font-size: 3vh;
@@ -102,7 +212,6 @@ input {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-40%, -50%);
     height: 200px;
     width: 250px;
     background-color: rgb(71, 70, 70);
@@ -111,13 +220,12 @@ input {
     box-shadow: 10px 5px 5px black;
     border: rgb(144, 144, 144) solid 4px;
     transition: all 150ms ease-in-out;
-    transform: translate(-40%, -60%);
+    transform: translate(-50%, -50%);
     opacity: 0;
     pointer-events: none;
 }
 
 .modal.animated {
-    transform: translate(-40%, -50%);
     opacity: 1;
     pointer-events: all;
 }
@@ -155,27 +263,7 @@ input {
     color: white;
 }
 
-.title {
-    position: absolute;
-    top: 3%;
-    left: 50%;
-    transform: translate(-43%, 0%);
-    font-size: 35px;
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-}
 
-.playAs {
-    position: absolute;
-    top: 8%;
-    left: 50%;
-    transform: translate(-43%, 0%);
-    font-size: 25px;
-    width: 100%;
-    text-align: center;
-    /* background-color: rgb(126, 59, 59); */
-}
 
 .correct {
     display: grid;
