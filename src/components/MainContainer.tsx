@@ -553,7 +553,7 @@ const MainContainer: React.FC<ContainerProps> = () => {
         </div>
         <input
           type="text"
-          placeholder="Search opening database..."
+          placeholder="1Search opening database..."
           onInput={(e) => {
             const _e = e.nativeEvent.target as HTMLInputElement;
             SearchOpening(_e.value.toLowerCase());
