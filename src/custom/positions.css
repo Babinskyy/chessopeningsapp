@@ -1,0 +1,43 @@
+/*white*/
+/*pawns*/
+.whitePawn{
+    background-image: url(../images/WhitePawn.png);
+}
+/*pieces*/
+.whiteRook{
+    background-image: url(../images/WhiteRook.png);
+}
+.whiteKnight{
+    background-image: url(../images/WhiteKnight.png);
+}
+.whiteBishop{
+    background-image: url(../images/WhiteBishop.png);
+}
+.whiteQueen{
+    background-image: url(../images/WhiteQueen.png);
+}
+.whiteKing{
+    background-image: url(../images/WhiteKing.png);
+}
+
+/*black*/
+/*pawns*/
+.blackPawn{
+    background-image: url(../images/BlackPawn.png);
+}
+/*pieces*/
+.blackRook{
+    background-image: url(../images/BlackRook.png);
+}
+.blackKnight{
+    background-image: url(../images/BlackKnight.png);
+}
+.blackBishop{
+    background-image: url(../images/BlackBishop.png);
+}
+.blackQueen{
+    background-image: url(../images/BlackQueen.png);
+}
+.blackKing{
+    background-image: url(../images/BlackKing.png);
+}

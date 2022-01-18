@@ -1,0 +1,235 @@
+.site {
+    /* max-height: 86vh; */
+    overflow: hidden;
+    margin: 5px;
+    margin-top: 15px;
+    max-width: 1040px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.chessboard-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    color: rgb(0, 0, 0);
+}
+
+.chessboard {
+    display: grid;
+    width: 60vw;
+    max-width: 70vh;
+    min-width: 60vh;
+    height: 60vw;
+    max-height: 70vh;
+    min-height: 60vh;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    box-shadow: 10px 5px 5px black;
+
+}
+
+.block {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.white {
+    background-color: rgb(238, 210, 187);
+    background-size: cover;
+}
+
+.black {
+    background-color: rgb(180, 135, 108);
+    background-size: cover;
+}
+
+.piece-active {
+    border: 2px solid blue;
+}
+
+.opening-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: auto;
+    width: fit-content;
+}
+
+.box-button:hover {
+    border: white 2px solid;
+    transition: .2s;
+}
+
+.opening-box {
+    max-width: 140px;
+    min-width: 140px;
+    background-color: rgb(51, 49, 49);
+    border: 2px solid rgb(144, 144, 144);
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 10px 5px 5px black;
+    margin: 25px 15px;
+}
+
+.opening-box:hover {
+    border-left: 2px solid rgb(255, 255, 255);
+    border-top: 2px solid rgb(255, 255, 255);
+    transition: .2s;
+    transform: translate(5%, 0%);
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+input {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-40%, 0%);
+    width: 400px;
+    height: 5vh;
+    font-size: 3vh;
+    text-align: center;
+    background-color: rgb(54, 53, 53);
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    height: 200px;
+    width: 250px;
+    background-color: rgb(71, 70, 70);
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 10px 5px 5px black;
+    border: rgb(144, 144, 144) solid 4px;
+    transition: all 150ms ease-in-out;
+    transform: translate(-40%, -60%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.animated {
+    transform: translate(-40%, -50%);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modalP {
+    margin: 7px
+}
+
+.whiteButton {
+    margin: 5px;
+    height: 50%;
+    padding: 0;
+    width: calc(50% - 20px);
+    background-color: rgb(71, 70, 70);
+    background-image: url(../images/WhitePawn.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.blackButton {
+    margin: 5px;
+    height: 50%;
+    padding: 0;
+    width: calc(50% - 20px);
+    background-color: rgb(71, 70, 70);
+    background-image: url(../images/BlackPawn.png);
+    background-size: cover;
+    background-position: center;
+}
+.checkButton{
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    background-color: rgb(71, 70, 70);
+    color: white;
+}
+
+.title {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-43%, 0%);
+    font-size: 35px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
+.playAs {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translate(-43%, 0%);
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+    /* background-color: rgb(126, 59, 59); */
+}
+
+.correct {
+    display: grid;
+    color: green;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 50px;
+}
+
+.wrong {
+    display: grid;
+    color: rgb(168, 12, 12);
+    font-weight: bold;
+    padding: 20px;
+    font-size: 50px;
+}
+
+.tryAgainButton {
+    border: rgb(133, 133, 133) solid 2px;
+    font-size: 25px;
+    color: rgb(184, 184, 184);
+    height: 50px;
+}
+
+.tryAgainButton:hover {
+    border: rgb(185, 184, 184) solid 2px;
+    color: rgb(224, 222, 222);
+    transition: .2s;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: rgb(168, 12, 12);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #555;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
