@@ -502,6 +502,7 @@ const MainContainer: React.FC<ContainerProps> = () => {
       } else {
         clearInterval(interval);
         setBlockOpenings(false);
+        setPlayAs("");
       }
     }, 650);
   };
