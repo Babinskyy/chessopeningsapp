@@ -13,7 +13,7 @@
         text-align: center;
         margin: 10px 0;
     }
-    
+
     .playAs {
         font-size: 25px;
         width: 100%;
@@ -34,6 +34,7 @@
         display: block;
         margin-top: 20px;
     }
+
     .opening-box:hover {
         transform: scale(1.05);
     }
@@ -75,27 +76,23 @@
     }
 
     .title {
-        position: absolute;
-        top: 3%;
-        left: 50%;
-        transform: translate(-43%, 0%);
+        transform: translate(7%, 100%);
         font-size: 35px;
         font-weight: bold;
         width: 100%;
         text-align: center;
     }
-    
+
     .playAs {
-        position: absolute;
-        top: 8%;
-        left: 50%;
-        transform: translate(-43%, 0%);
+        transform: translate(7%, 150%);
         font-size: 25px;
         width: 100%;
         text-align: center;
     }
 
     .opening-container {
+        position: absolute;
+        top: 0;
         min-height: 100vh;
         max-height: 100vh;
         overflow: auto;
@@ -108,10 +105,11 @@
         left: 50%;
         transform: translate(-40%, 0%);
     }
+
     .opening-box:hover {
         transform: translate(5%, 0%);
     }
-    
+
     .modal.animated {
         transform: translate(-40%, -50%);
     }
@@ -256,7 +254,8 @@ input {
     background-size: cover;
     background-position: center;
 }
-.checkButton{
+
+.checkButton {
     padding: 0;
     margin: 0;
     font-size: 25px;
